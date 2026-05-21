@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dr. Vranjes &amp; Elemis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#F7F4EF;--warm:#FDFCFA;--ink:#1C1917;--ink60:#6B6560;--ink30:#C4BFB8;--ink10:#EDE9E3;--gold:#B8975A;--goldl:#F0E8D8;--wa:#25D366;--tg:#2AABEE;--r:4px;--rl:10px}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Outfit',sans-serif;font-weight:300;background:var(--cream);color:var(--ink);min-height:100vh;padding-bottom:160px;-webkit-font-smoothing:antialiased}
+.header{background:var(--ink);padding:0 24px;position:sticky;top:0;z-index:200}
+.header-inner{max-width:800px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:16px 0;border-bottom:1px solid rgba(255,255,255,0.08)}
+.hlogo{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:300;letter-spacing:0.12em;color:#fff;text-transform:uppercase}
+.hcount{font-size:11px;letter-spacing:0.1em;color:rgba(255,255,255,0.3);text-transform:uppercase}
+.sbar{background:var(--ink);padding:0 24px 14px;position:sticky;top:57px;z-index:199}
+.sinner{max-width:800px;margin:0 auto;position:relative}
+.sinput{width:100%;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:var(--r);padding:10px 14px 10px 38px;font-family:'Outfit',sans-serif;font-size:13px;font-weight:300;letter-spacing:0.04em;color:#fff;outline:none;transition:border-color 0.2s,background 0.2s}
+.sinput::placeholder{color:rgba(255,255,255,0.3)}
+.sinput:focus{border-color:rgba(255,255,255,0.3);background:rgba(255,255,255,0.1)}
+.sicon{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:rgba(255,255,255,0.3);pointer-events:none}
+.twrap{background:var(--warm);border-bottom:1px solid var(--ink10);overflow-x:auto;-ms-overflow-style:none;scrollbar-width:none}
+.twrap::-webkit-scrollbar{display:none}
+.tinner{max-width:800px;margin:0 auto;padding:0 24px;display:flex}
+.tab{padding:14px 20px;font-size:11px;font-weight:400;letter-spacing:0.14em;text-transform:uppercase;cursor:pointer;border-bottom:2px solid transparent;color:var(--ink60);white-space:nowrap;transition:color 0.2s,border-color 0.2s;user-select:none;flex-shrink:0}
+.tab:hover{color:var(--ink)}
+.tab.active{color:var(--ink);border-bottom-color:var(--ink)}
+.content{max-width:800px;margin:0 auto;padding:20px 24px}
+.cblock{margin-bottom:12px;border:1px solid var(--ink10);border-radius:var(--rl);overflow:hidden;background:var(--warm);transition:box-shadow 0.2s}
+.cblock:hover{box-shadow:0 2px 20px rgba(28,25,23,0.06)}
+.chdr{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;cursor:pointer;user-select:none;transition:background 0.15s}
+.chdr:hover{background:#FAFAF8}
+.cbtag{font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);font-weight:400}
+.ctitle{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:300;letter-spacing:0.04em;color:var(--ink);margin-top:3px}
+.ccnt{font-size:10px;letter-spacing:0.1em;color:var(--ink30);text-transform:uppercase;margin-top:3px}
+.cchev{width:24px;height:24px;display:flex;align-items:center;justify-content:center;color:var(--ink30);transition:transform 0.25s;flex-shrink:0}
+.cchev.open{transform:rotate(180deg)}
+.cchev svg{width:14px;height:14px}
+.tbwrap{border-top:1px solid var(--ink10)}
+.thead{display:grid;grid-template-columns:80px 1fr 90px 90px 90px;padding:9px 20px;background:#F9F7F4;border-bottom:1px solid var(--ink10)}
+.th{font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink30);font-weight:400}
+.th.r{text-align:right}
+.irow{display:grid;grid-template-columns:80px 1fr 90px 90px 90px;padding:11px 20px;border-bottom:1px solid var(--ink10);align-items:center;transition:background 0.12s}
+.irow:last-child{border-bottom:none}
+.irow:hover{background:#FAFAF8}
+.irow.sel{background:var(--goldl)}
+.irow.sel:hover{background:#EDE4CC}
+.isku{font-size:10px;color:var(--ink30);letter-spacing:0.04em;line-height:1.4;font-family:monospace}
+.iname{font-size:12px;font-weight:300;color:var(--ink);line-height:1.5;padding-right:12px}
+.nbadge{display:inline-block;font-size:8px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;background:var(--ink);color:#fff;padding:2px 6px;border-radius:2px;margin-right:6px;vertical-align:middle;position:relative;top:-1px}
+.pnew{font-size:13px;font-weight:400;color:var(--ink);text-align:right;white-space:nowrap}
+.pold{font-size:11px;color:var(--ink30);text-decoration:line-through;text-align:right;white-space:nowrap}
+.qcell{display:flex;align-items:center;justify-content:flex-end;gap:6px}
+.qbtn{width:26px;height:26px;border:1px solid var(--ink10);border-radius:var(--r);background:var(--warm);color:var(--ink60);font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;transition:all 0.15s;flex-shrink:0;-webkit-tap-highlight-color:transparent;font-family:'Outfit',sans-serif}
+.qbtn:hover{border-color:var(--ink60);color:var(--ink);background:var(--cream)}
+.qbtn:active{transform:scale(0.93)}
+.qval{font-size:13px;font-weight:400;min-width:20px;text-align:center;color:var(--ink)}
+.nores{text-align:center;padding:60px 20px;font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:300;color:var(--ink30);letter-spacing:0.05em}
+.bbar{position:fixed;bottom:0;left:0;right:0;background:var(--ink);padding:16px 24px 28px;z-index:300;border-top:1px solid rgba(255,255,255,0.06)}
+.binner{max-width:800px;margin:0 auto}
+.tline{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:12px}
+.tlabel{font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.35)}
+.tright{display:flex;align-items:baseline;gap:10px}
+.titems{font-size:11px;color:rgba(255,255,255,0.3);letter-spacing:0.06em}
+.tsum{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:#fff;letter-spacing:0.02em}
+.brow{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.obtn{display:flex;align-items:center;justify-content:center;gap:8px;padding:12px 16px;border:none;border-radius:var(--r);font-family:'Outfit',sans-serif;font-size:12px;font-weight:400;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;transition:opacity 0.2s,transform 0.1s;-webkit-tap-highlight-color:transparent}
+.obtn:active{transform:scale(0.97)}
+.obtn:disabled{opacity:0.25;cursor:default}
+.bwa{background:var(--wa);color:#fff}
+.btg{background:var(--tg);color:#fff}
+.ehint{text-align:center;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.2);margin-top:10px}
+@media(max-width:560px){
+  .header,.sbar{padding-left:16px;padding-right:16px}
+  .tinner,.content{padding-left:12px;padding-right:12px}
+  .thead,.irow{grid-template-columns:60px 1fr 70px 66px 78px;padding:9px 12px}
+  .iname{font-size:11px;padding-right:6px}
+  .th{font-size:8px}
+  .bbar{padding:12px 16px 24px}
+  .tsum{font-size:24px}
+  .obtn{font-size:11px;padding:11px 8px;letter-spacing:0.06em}
+}
+</style>
+</head>
+<body>
+<header class="header">
+  <div class="header-inner">
+    <div class="hlogo">Dr. Vranjes &amp; Elemis</div>
+    <div class="hcount" id="hcount"></div>
+  </div>
+</header>
+<div class="sbar">
+  <div class="sinner">
+    <span class="sicon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span>
+    <input class="sinput" type="search" placeholder="Поиск по названию или артикулу…" id="si" oninput="onSearch()">
+  </div>
+</div>
+<div class="twrap"><div class="tinner" id="tabs"></div></div>
+<main class="content" id="content"></main>
+<div class="bbar">
+  <div class="binner">
+    <div class="tline">
+      <span class="tlabel">Итого заказ</span>
+      <div class="tright"><span class="titems" id="tc"></span><span class="tsum" id="ts">0 &#8381;</span></div>
+    </div>
+    <div class="brow">
+      <button class="obtn bwa" id="wabtn" disabled onclick="send('wa')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp
+      </button>
+      <button class="obtn btg" id="tgbtn" disabled onclick="send('tg')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+        Telegram
+      </button>
+    </div>
+    <div class="ehint" id="ehint">Выберите товары, нажав «+»</div>
+  </div>
+</div>
+<script>
+var B=[{"name":"Dr. Vranjes Firenze","id":"dv","collections":[{"name":"Eau de Parfum","items":[{"sku":"DV093291","name":"Парфюмерная вода VRANJES FIRENZE NOTTETEMPO 100 мл","old":18500,"new":12950,"isNew":false},{"sku":"DV095417","name":"Парфюмерная вода VRANJES FIRENZE NOTTETEMPO 40 мл","old":9000,"new":6300,"isNew":false},{"sku":"DV093239","name":"Парфюмерная вода VRANJES FIRENZE CAPOGIRO 100 мл","old":18500,"new":12950,"isNew":false},{"sku":"DV095424","name":"Парфюмерная вода VRANJES FIRENZE CAPOGIRO 40 мл","old":9000,"new":6300,"isNew":false},{"sku":"DV093277","name":"Парфюмерная вода VRANJES FIRENZE CHIAROSCURO 100 мл","old":18500,"new":12950,"isNew":false},{"sku":"DV095431","name":"Парфюмерная вода VRANJES FIRENZE CHIAROSCURO 40 мл","old":9000,"new":6300,"isNew":false},{"sku":"DV093246","name":"Парфюмерная вода VRANJES FIRENZE TINTINNIO 100 мл","old":18500,"new":12950,"isNew":false},{"sku":"DV095448","name":"Парфюмерная вода VRANJES FIRENZE TINTINNIO 40 мл","old":9000,"new":6300,"isNew":false},{"sku":"DV093284","name":"Парфюмерная вода VRANJES FIRENZE MATTUTINO 100 мл","old":18500,"new":12950,"isNew":false},{"sku":"DV095455","name":"Парфюмерная вода VRANJES FIRENZE MATTUTINO 40 мл","old":9000,"new":6300,"isNew":false},{"sku":"DV093307","name":"Парфюмерная вода VRANJES FIRENZE MERIGGIARE 100 мл","old":18500,"new":12950,"isNew":false},{"sku":"DV095462","name":"Парфюмерная вода VRANJES FIRENZE MERIGGIARE 40 мл","old":9000,"new":6300,"isNew":false},{"sku":"DV093260","name":"Парфюмерная вода VRANJES FIRENZE PETALOSO 100 мл","old":18500,"new":12950,"isNew":false},{"sku":"DV095479","name":"Парфюмерная вода VRANJES FIRENZE PETALOSO 40 мл","old":9000,"new":6300,"isNew":false},{"sku":"DV093253","name":"Парфюмерная вода VRANJES FIRENZE INTRIGO 100 мл","old":18500,"new":12950,"isNew":false},{"sku":"DV095486","name":"Парфюмерная вода VRANJES FIRENZE INTRIGO 40 мл","old":9000,"new":6300,"isNew":false},{"sku":"DV094830","name":"Парфюмерный набор VRANJES FIRENZE 8 шт. по 1,5 мл","old":4000,"new":2800,"isNew":false}]},{"name":"ACQUA","items":[{"sku":"DV393013","name":"Ароматический диффузор для дома Acqua 250 мл","old":9300,"new":6510,"isNew":false},{"sku":"DV393174","name":"Ароматический диффузор для дома Acqua 500 мл","old":14400,"new":10080,"isNew":false},{"sku":"DV393044","name":"Рефил для ароматического диффузора для дома Acqua 500 мл","old":10200,"new":7140,"isNew":false}]},{"name":"AMBRA","items":[{"sku":"DV397288","name":"Ароматический диффузор для дома Ambra 250 мл","old":9300,"new":6510,"isNew":false},{"sku":"DV397424","name":"Ароматический диффузор для дома Ambra 500 мл","old":14400,"new":10080,"isNew":false},{"sku":"DV397295","name":"Рефил для ароматического диффузора для дома Ambra 500 мл","old":10200,"new":7140,"isNew":false},{"sku":"DV395932","name":"Ароматическая свеча Ambra Onyx 80 г","old":4200,"new":2940,"isNew":false},{"sku":"DV395949","name":"Ароматическая свеча Ambra Onyx 200 г","old":7200,"new":5040,"isNew":false},{"sku":"DV395956","name":"Ароматическая свеча Ambra Onyx 500 г","old":11700,"new":8190,"isNew":false},{"sku":"DV395963","name":"Ароматическая свеча Ambra Onyx 1000 г","old":23100,"new":16170,"isNew":false},{"sku":"DV396069","name":"Ароматическая свеча Ambra Onyx 3000 г","old":54000,"new":37800,"isNew":false}]},{"name":"BELLINI","items":[{"sku":"DV930106","name":"Ароматический диффузор для дома Bellini 250 мл","old":11400,"new":7980,"isNew":false},{"sku":"DV930113","name":"Ароматический диффузор для дома Bellini 500 мл","old":17100,"new":11970,"isNew":false},{"sku":"DV930120","name":"Рефил для ароматического диффузора для дома Bellini 500 мл","old":12300,"new":8610,"isNew":false}]},{"name":"GIARDINO DI BOBOLI","items":[{"sku":"DV274469","name":"Ароматический диффузор для дома Giardino di Boboli 250 мл","old":11400,"new":7980,"isNew":false},{"sku":"DV274476","name":"Ароматический диффузор для дома Giardino di Boboli 500 мл","old":17100,"new":11970,"isNew":false},{"sku":"DV273479","name":"Рефил для ароматического диффузора для дома Giardino di Boboli 500 мл","old":12300,"new":8610,"isNew":false}]},{"name":"GINGER LIME","items":[{"sku":"DV273585","name":"Ароматический диффузор для дома Ginger Lime 250 мл","old":9300,"new":6510,"isNew":false},{"sku":"DV272717","name":"Ароматический диффузор для дома Ginger Lime 500 мл","old":14400,"new":10080,"isNew":false},{"sku":"DV273448","name":"Рефил для ароматического диффузора для дома Ginger Lime 500 мл","old":10200,"new":7140,"isNew":false},{"sku":"DR272700","name":"Ароматический спрей для дома Ginger Lime 100 мл","old":5400,"new":3780,"isNew":true},{"sku":"DV395772","name":"Ароматическая свеча Ginger Lime Pearl 80 г","old":4200,"new":2940,"isNew":false},{"sku":"DV395789","name":"Ароматическая свеча Ginger Lime Pearl 200 г","old":7200,"new":5040,"isNew":false},{"sku":"DV395796","name":"Ароматическая свеча Ginger Lime Pearl 500 г","old":11700,"new":8190,"isNew":false},{"sku":"DV395802","name":"Ароматическая свеча Ginger Lime Pearl 1000 г","old":23100,"new":16170,"isNew":false},{"sku":"DV396045","name":"Ароматическая свеча Ginger Lime Pearl 3000 г","old":54000,"new":37800,"isNew":false}]},{"name":"LEATHER OUD","items":[{"sku":"DV396953","name":"Ароматический диффузор для дома Leather Oud 250 мл","old":11400,"new":7980,"isNew":false},{"sku":"DV396960","name":"Ароматический диффузор для дома Leather Oud 500 мл","old":17100,"new":11970,"isNew":false},{"sku":"DV397004","name":"Рефил для ароматического диффузора для дома Leather Oud 500 мл","old":12300,"new":8610,"isNew":false}]},{"name":"MASERATI","items":[{"sku":"DV392559","name":"Ароматический диффузор для дома Maserati 500 мл","old":18000,"new":12600,"isNew":false},{"sku":"DV392597","name":"Рефил для ароматического диффузора для дома Maserati 500 мл","old":13200,"new":9240,"isNew":false}]},{"name":"MILANO","items":[{"sku":"DV931769","name":"Ароматический диффузор для дома Milano 250 мл","old":11400,"new":7980,"isNew":false},{"sku":"DV931806","name":"Ароматический диффузор для дома Milano 500 мл","old":17100,"new":11970,"isNew":false},{"sku":"DV930861","name":"Рефил для ароматического диффузора для дома Milano 500 мл","old":12300,"new":8610,"isNew":false},{"sku":"DR937587","name":"Ароматический спрей для дома Milano 100 мл","old":7800,"new":5460,"isNew":true}]},{"name":"OUD NOBILE","items":[{"sku":"DV270065","name":"Ароматический диффузор для дома Oud Nobile 250 мл","old":11400,"new":7980,"isNew":false},{"sku":"DV270072","name":"Ароматический диффузор для дома Oud Nobile 500 мл","old":17100,"new":11970,"isNew":false},{"sku":"DV270089","name":"Рефил для ароматического диффузора для дома Oud Nobile 500 мл","old":12300,"new":8610,"isNew":false},{"sku":"DV395697","name":"Ароматическая свеча Oud Nobile Gold 80 г","old":4200,"new":2940,"isNew":false},{"sku":"DV395703","name":"Ароматическая свеча Oud Nobile Gold 200 г","old":7200,"new":5040,"isNew":false},{"sku":"DV395710","name":"Ароматическая свеча Oud Nobile Gold 500 г","old":11700,"new":8190,"isNew":false},{"sku":"DV395727","name":"Ароматическая свеча Oud Nobile Gold 1000 г","old":23100,"new":16170,"isNew":false},{"sku":"DV396021","name":"Ароматическая свеча Oud Nobile Gold 3000 г","old":54000,"new":37800,"isNew":false}]},{"name":"ROSA TABACCO","items":[{"sku":"DV394737","name":"Ароматический диффузор для дома Rosa Tabacco 250 мл","old":9300,"new":6510,"isNew":false},{"sku":"DV394744","name":"Ароматический диффузор для дома Rosa Tabacco 500 мл","old":14400,"new":10080,"isNew":false},{"sku":"DV394782","name":"Рефил для ароматического диффузора для дома Rosa Tabacco 500 мл","old":10200,"new":7140,"isNew":false},{"sku":"DV394645","name":"Ароматическая свеча Rosa Tabacco Onyx 80 г","old":4200,"new":2940,"isNew":false},{"sku":"DV394652","name":"Ароматическая свеча Rosa Tabacco Onyx 200 г","old":7200,"new":5040,"isNew":false},{"sku":"DV394669","name":"Ароматическая свеча Rosa Tabacco Onyx 500 г","old":11700,"new":8190,"isNew":false},{"sku":"DV394676","name":"Ароматическая свеча Rosa Tabacco Onyx 1000 г","old":23100,"new":16170,"isNew":false},{"sku":"DV394683","name":"Ароматическая свеча Rosa Tabacco Onyx 3000 г","old":54000,"new":37800,"isNew":false}]},{"name":"ROSSO NOBILE","items":[{"sku":"DV090344","name":"Ароматический диффузор для дома Rosso Nobile 250 мл, Лимитированная коллекция","old":11400,"new":7980,"isNew":true},{"sku":"DV090375","name":"Ароматический диффузор для дома Rosso Nobile 500 мл, Лимитированная коллекция","old":17100,"new":11970,"isNew":true},{"sku":"DV272830","name":"Ароматический спрей для дома Rosso Nobile 100 мл","old":7800,"new":5460,"isNew":false},{"sku":"DV272748","name":"Ароматический диффузор для дома Rosso Nobile 250 мл","old":11400,"new":7980,"isNew":false},{"sku":"DV272755","name":"Ароматический диффузор для дома Rosso Nobile 500 мл","old":17100,"new":11970,"isNew":false},{"sku":"DV273462","name":"Рефил для ароматического диффузора для дома Rosso Nobile 500 мл","old":12300,"new":8610,"isNew":false},{"sku":"DV395857","name":"Ароматическая свеча Rosso Nobile Red Tourmaline 80 г","old":4200,"new":2940,"isNew":false},{"sku":"DV395871","name":"Ароматическая свеча Rosso Nobile Red Tourmaline 200 г","old":7200,"new":5040,"isNew":false},{"sku":"DV395895","name":"Ароматическая свеча Rosso Nobile Red Tourmaline 500 г","old":13800,"new":9660,"isNew":false},{"sku":"DV395918","name":"Ароматическая свеча Rosso Nobile Red Tourmaline 1000 г","old":23100,"new":16170,"isNew":false},{"sku":"DV396083","name":"Ароматическая свеча Rosso Nobile Red Tourmaline 3000 г","old":54000,"new":37800,"isNew":false}]},{"name":"VELVET SAFFRON","items":[{"sku":"DV090450","name":"Ароматический диффузор для дома Velvet Saffron 250 мл","old":11400,"new":7980,"isNew":false},{"sku":"DV090542","name":"Ароматический диффузор для дома Velvet Saffron 500 мл","old":17100,"new":11970,"isNew":false},{"sku":"DV090535","name":"Рефил для ароматического диффузора для дома Velvet Saffron 500 мл","old":12300,"new":8610,"isNew":false}]},{"name":"Авто парфюм","items":[{"sku":"DV396632","name":"Ароматизатор для автомобиля - диспенсер Карбон","old":4800,"new":3360,"isNew":false},{"sku":"DV396656","name":"Ароматизатор для автомобиля - диспенсер Никель","old":4800,"new":3360,"isNew":false},{"sku":"DV396649","name":"Ароматизатор для автомобиля - диспенсер Хром","old":4800,"new":3360,"isNew":false},{"sku":"DV398230","name":"Ароматизатор для автомобиля - сменный блок Ambra","old":3600,"new":2520,"isNew":false},{"sku":"DV398247","name":"Ароматизатор для автомобиля - сменный блок Ginger Lime","old":3600,"new":2520,"isNew":false},{"sku":"DV398278","name":"Ароматизатор для автомобиля - сменный блок Milano","old":3600,"new":2520,"isNew":false},{"sku":"DV398261","name":"Ароматизатор для автомобиля - сменный блок Oud Nobile","old":3600,"new":2520,"isNew":false},{"sku":"DV398292","name":"Ароматизатор для автомобиля - сменный блок Rosa Tabacco","old":3600,"new":2520,"isNew":false},{"sku":"DV398254","name":"Ароматизатор для автомобиля - сменный блок Rosso Nobile","old":3600,"new":2520,"isNew":false}]},{"name":"Наборы","items":[{"sku":"DV090313","name":"Подарочный набор Rosso Nobile Диффузор 250 мл + Ароматическая свеча 80 г","old":15600,"new":10920,"isNew":true},{"sku":"DV397554","name":"Подарочный набор Rosso Nobile Диффузор 500 мл + Ароматическая свеча 500 г","old":28800,"new":20160,"isNew":false},{"sku":"DV397530","name":"Подарочный набор Rosso Nobile Диффузор 500 мл + Рефил 500 мл","old":29400,"new":20580,"isNew":false}]}]},{"name":"Elemis","id":"el","collections":[{"name":"Наборы","items":[{"sku":"EL89803","name":"Набор для лица «Чудеса ухода Про-Коллаген 24/7»","old":39200,"new":20268,"isNew":true},{"sku":"EL89804","name":"Набор для лица «Зачарованная Роза Про-Коллаген»","old":16100,"new":8773,"isNew":true},{"sku":"EL89823","name":"Набор для лица «Яркие звезды Про-Коллаген»","old":11600,"new":5990,"isNew":true},{"sku":"EL671275","name":"Набор-знакомство для тела «Дуэт Франжипани»","old":4000,"new":2178,"isNew":false},{"sku":"EL87334","name":"Набор для лица «Программа ухода Здоровье кожи Про-Коллаген»","old":29100,"new":14157,"isNew":true},{"sku":"EL87332","name":"Набор для лица «Программа ухода Сияние Дайнемик»","old":15200,"new":6958,"isNew":true},{"sku":"EL87339","name":"Набор для лица «Программа ухода Упругость кожи Роза Про-Коллаген»","old":27150,"new":12705,"isNew":true}]},{"name":"Базовый уход","items":[{"sku":"EL50275","name":"Очищающий крем для проблемной кожи на основе глины 150 мл","old":6200,"new":3751,"isNew":false},{"sku":"EL40160","name":"Тоник для комбинированной кожи Лаванда / Balancing Lavender Toner","old":5300,"new":3207,"isNew":false},{"sku":"EL40188","name":"Успокаивающий тоник Абрикос / Soothing Apricot Toner","old":5300,"new":3207,"isNew":false},{"sku":"EL40469","name":"Капсулы для лица Клеточное восстановление / Cellular Recovery Skin Bliss Capsules","old":14600,"new":8833,"isNew":false}]},{"name":"Суперфуд","items":[{"sku":"EL40131","name":"Питательный ночной крем для лица  2 в 1 Суперфуд 50 мл","old":7700,"new":4658,"isNew":false},{"sku":"EL60124","name":"Увлажняющий Крем для Лица с Эффектом Праймера Суперфуд 60 мл","old":7800,"new":4719,"isNew":false},{"sku":"EL60123","name":"Очищающее масло для лица с AHA-кислотами Суперфуд 90 мл","old":5400,"new":3267,"isNew":false},{"sku":"EL60225","name":"Гель для умывания с Омега-комплексом СуперФуд / Superfood Facial Wash 200ml","old":4900,"new":2965,"isNew":false},{"sku":"EL40173","name":"Дневной крем для лица с Омега-комплексом СуперФуд / Superfood Day Cream 50ml","old":7200,"new":4356,"isNew":false},{"sku":"EL40174","name":"Масло для лица с Омега-комплексом Суперфуд / Superfood Facial Oil 15ml","old":9100,"new":5506,"isNew":false},{"sku":"EL40158","name":"Мист для лица 4 в 1 Кефир-Чай СуперФуд / Superfood Kefir-Tea Mist 100ml","old":4900,"new":2965,"isNew":false}]},{"name":"Про-Коллаген","items":[{"sku":"EL60112","name":"Увлажняющий мусс для очищения кожи Про-Коллаген 125 мл","old":7900,"new":4780,"isNew":true},{"sku":"EL70164","name":"Тонизирующий мист Про-Коллаген 150 мл","old":7300,"new":4416,"isNew":true},{"sku":"EL60102","name":"Эксфолиант-бустер для сияния кожи Про-Коллаген 100 мл","old":9900,"new":5990,"isNew":true},{"sku":"EL40698","name":"Крем для лица Морские водоросли Про-Коллаген 30мл","old":11800,"new":7139,"isNew":false},{"sku":"EL60230","name":"Крем для лица Роза Про-Коллаген 50 мл","old":17900,"new":10830,"isNew":false},{"sku":"EL70171","name":"Крем для век Жизненная сила Про-Коллаген 15 мл","old":14600,"new":8833,"isNew":false},{"sku":"EL40243","name":"Микрокапсулированная сыворотка Роза Про-Коллаген 30 мл","old":17400,"new":10527,"isNew":true},{"sku":"EL60127","name":"Восстанавливающая сыворотка Future Restore Про-Коллаген 30 мл","old":20500,"new":12403,"isNew":true},{"sku":"EL60110","name":"Защитный флюид Про-Коллаген SPF 50 40 мл","old":9300,"new":5626,"isNew":true},{"sku":"EL40150","name":"Дневной крем для лица Матрикс Про-Коллаген 50 мл","old":24600,"new":14883,"isNew":false},{"sku":"EL50992","name":"Обновляющая сыворотка для лица Про-Коллаген 15 мл","old":12900,"new":7805,"isNew":false},{"sku":"EL60158","name":"Увлажняющая эссенция для лица Морские водоросли Про-Коллаген 100 мл","old":11500,"new":6958,"isNew":false},{"sku":"EL60174","name":"Гель для очищения кожи Морские Водоросли Про-Коллаген 150 мл","old":8500,"new":5142,"isNew":false},{"sku":"EL60137","name":"Пилинг для лица с тремя кислотами Про-Коллаген 30 мл","old":14500,"new":8773,"isNew":false},{"sku":"EL60132","name":"Пробуждающая Маска для век Про-Коллаген 15 мл","old":11000,"new":6655,"isNew":false},{"sku":"EL60129","name":"Масло для лица Роза Про-Коллаген 15 мл  Pro-Collagen Rose Facial Oil 15ml","old":12100,"new":7321,"isNew":false},{"sku":"EL60175","name":"Бальзам для умывания Черная Вишня Про-Коллаген 100 гр","old":8600,"new":5203,"isNew":true},{"sku":"EL60283","name":"Бальзам для умывания Зеленый Инжир Про-Коллаген 100 гр","old":8600,"new":5203,"isNew":true},{"sku":"EL60187","name":"Anti-Age Бальзам для умывания Про-Коллаген / Pro-Collagen Cleansing Balm 100g","old":8600,"new":5203,"isNew":false},{"sku":"EL40179","name":"Бальзам для умывания Роза Про-Коллаген / Pro-Collagen Rose Cleansing Balm 100g","old":8600,"new":5203,"isNew":false},{"sku":"EL00267","name":"Крем для лица Морские водоросли Про-Коллаген / Pro-Collagen Marine Cream","old":17900,"new":10830,"isNew":false},{"sku":"EL50140","name":"Крем для лица Морские водоросли Про-Коллаген SPF 30 / Pro-Collagen Marine Cream SPF 30 50ml","old":17900,"new":10830,"isNew":false},{"sku":"EL50194","name":"Крем для лица Морские водоросли Про-Коллаген Ультра Рич / Pro-Collagen Marine Cream Ultra Rich","old":17900,"new":10830,"isNew":false},{"sku":"EL50244","name":"Лифтинг-бальзам для шеи и декольте Про-Коллаген /Pro-Collagen Neck and Décolleté Balm","old":10600,"new":6413,"isNew":false},{"sku":"EL60131","name":"Лифтинг-маска Морские водоросли Про-Коллаген / Pro-Collagen Marine Mask","old":10900,"new":6595,"isNew":false},{"sku":"EL60197","name":"Лифтинг-патчи для контура глаз Гидро-гель Про-Коллаген (6 пар) / Pro-Collagen Hydra-Gel Mask 6pk","old":10200,"new":6171,"isNew":false},{"sku":"EL70189","name":"Лифтинг-сыворотка для век Про-Коллаген / Pro-Collagen Advanced Eye Treatment","old":9400,"new":5687,"isNew":false},{"sku":"EL40184","name":"Масло для лица Морские водоросли Про-Коллаген / Pro-Collagen Marine Oil 15ml","old":12100,"new":7321,"isNew":false},{"sku":"EL40144","name":"Ночной крем для лица Про-Коллаген 50 мл","old":21300,"new":12887,"isNew":false},{"sku":"EL70143","name":"Ночной крем для лица Матрикс Про-Коллаген / Pro-Collagen Overnight Matrix 50 ml","old":30300,"new":18332,"isNew":false},{"sku":"EL60189","name":"Супер сыворотка для лица Эликсир Про-Коллаген / Pro-Collagen Super Serum Elixir 15ml","old":11100,"new":6716,"isNew":false}]},{"name":"Дайнемик","items":[{"sku":"EL40155","name":"Сыворотка для лица с витамином С Дайнемик Anti-age 30 мл","old":17800,"new":10769,"isNew":false},{"sku":"EL50141","name":"Дневной крем для лица Дайнемик anti-age SPF30 / Dynamic Resurfacing Day Cream SPF30 50ml","old":17900,"new":10830,"isNew":false},{"sku":"EL40178","name":"Крем для умывания Дайнемик Anti-age / Dynamic Resurfacing Facial Wash","old":7100,"new":4296,"isNew":false},{"sku":"EL60153","name":"Обновляющие диски для лица Дайнемик anti-age / Dynamic Resurfacing Facial Pads 60 pk","old":8100,"new":4900,"isNew":false}]},{"name":"Ультра Смарт","items":[{"sku":"EL60234","name":"Ночной крем для лица Ультра-Смарт Про-Коллаген, 50 мл","old":46000,"new":27830,"isNew":false},{"sku":"EL40130","name":"Дневной крем для лица Ультра Смарт Про-Коллаген 50 мл","old":39000,"new":23595,"isNew":false},{"sku":"EL60160","name":"Дуэт для век Ультра-Смарт Про-Коллаген 2 х 10 мл / Ultra-Smart Pro-Collagen Eye Treatment Duo","old":30000,"new":18150,"isNew":false},{"sku":"EL40152","name":"Сыворотка для лица Ультра-Смарт Про-Коллаген Комплекс 12 / Ultra-Smart Pro-Collagen Complex 12","old":43700,"new":26439,"isNew":false},{"sku":"EL50149","name":"Увлажняющая маска для лица Импульс Молодости Ультра-Смарт Про-Коллаген 50 мл  ULTRA SMART Pro-Collagen Aqua Infusion Mask 50ml","old":25000,"new":15125,"isNew":false}]},{"name":"Экзотик","items":[{"sku":"EL60820","name":"Крем для тела Франжипани-Монои / Exotic Frangipani Monoi Body Cream 200ml","old":5700,"new":3449,"isNew":false},{"sku":"EL60754","name":"Масло для тела Франжипани-Монои / Exotic Frangipani Monoi Body Oil 100ml","old":8400,"new":5082,"isNew":false},{"sku":"EL40763","name":"Регенерирующее масло для тела Японская камелия / Japanese Camellia Oil Blend","old":8400,"new":5082,"isNew":false},{"sku":"EL50765","name":"Солевой пилинг для тела Лайм-Имбирь 490 грамм / Exotic Lime & Ginger Salt Glow 490g","old":9800,"new":5929,"isNew":false},{"sku":"EL00070","name":"Солевой пилинг для тела Франжипани-Монои / Frangipani Monoi Salt Glow","old":9800,"new":5929,"isNew":false},{"sku":"EL60818","name":"Крем для душа Франжипани-Монои  / Exotic Frangipani Shower Cream","old":5500,"new":3328,"isNew":false}]},{"name":"Скульптор тела","items":[{"sku":"EL50131","name":"Гель для душа \"Охлаждающий\", 200 мл","old":5100,"new":3086,"isNew":false},{"sku":"EL60877","name":"Антицеллюлитное детокс-масло для тела Active Body Concentrate 100 мл / Cellutox Active Body Oil","old":8400,"new":5082,"isNew":false},{"sku":"EL40165","name":"Антицеллюлитный крем для тела Морские Водоросли / Targeted Toning Body Moisturiser 200 ml","old":14700,"new":8894,"isNew":false},{"sku":"EL50451","name":"Щетка для тела (в упаковке)/ Body Detox Skin Brush","old":4300,"new":2602,"isNew":false}]},{"name":"Релаксация","items":[{"sku":"EL60149","name":"Крем для рук и ногтей Anti-age / Pro-Radiance Hand and Nail Cream","old":6200,"new":3751,"isNew":false}]},{"name":"Мужская программа","items":[{"sku":"EL60214","name":"Пенящийся гель для бритья Ледяная свежесть 200 мл","old":5500,"new":3328,"isNew":false},{"sku":"EL50205","name":"Крем для лица Морские водоросли Про-Коллаген для мужчин / TFM Pro-Collagen Marine Cream","old":11700,"new":7079,"isNew":false},{"sku":"EL60220","name":"Увлажняющий крем после бритья / Daily Moisture Boost","old":7100,"new":4296,"isNew":false}]},{"name":"Волосы","items":[{"sku":"EL00944","name":"Шампунь для волос Ревитализация 300 мл","old":6600,"new":3993,"isNew":true},{"sku":"EL00934","name":"Кондиционер для волос Ревитализация 300 мл","old":6600,"new":3993,"isNew":true}]}]}];
+var WA="79149788055",TG="dealer_vl";
+var Q={},AB="all",SQ="",OC={};
+
+function f(n){return Math.round(n).toLocaleString("ru-RU")+" ₽";}
+
+function ai(){
+  var o=[];
+  for(var i=0;i<B.length;i++){
+    for(var j=0;j<B[i].collections.length;j++){
+      for(var k=0;k<B[i].collections[j].items.length;k++){
+        var it=B[i].collections[j].items[k];
+        o.push({sku:it.sku,name:it.name,old:it.old,new:it.new,isNew:it.isNew,brand:B[i].name});
+      }
+    }
+  }
+  return o;
+}
+
+function cq(sku,d){
+  Q[sku]=Math.max(0,(Q[sku]||0)+d);
+  var e=document.getElementById("q_"+sku);
+  var r=document.getElementById("r_"+sku);
+  if(e) e.textContent=Q[sku];
+  if(r){
+    if(Q[sku]>0) r.classList.add("sel");
+    else r.classList.remove("sel");
+  }
+  ut();
+}
+
+function bm(){
+  var items=ai(),lines=["Заказ:",""],total=0,bb={};
+  var skus=Object.keys(Q);
+  for(var s=0;s<skus.length;s++){
+    var sku=skus[s],q=Q[sku];
+    if(q<1) continue;
+    var it=null;
+    for(var i=0;i<items.length;i++){if(items[i].sku===sku){it=items[i];break;}}
+    if(!it) continue;
+    if(!bb[it.brand]) bb[it.brand]=[];
+    bb[it.brand].push({sku:it.sku,name:it.name,price:it.new,q:q});
+    total+=it.new*q;
+  }
+  var brands=Object.keys(bb);
+  for(var b=0;b<brands.length;b++){
+    lines.push("*"+brands[b]+"*");
+    var its=bb[brands[b]];
+    for(var i=0;i<its.length;i++){
+      lines.push("• "+its[i].sku+" "+its[i].name+" × "+its[i].q+" = "+f(its[i].price*its[i].q));
+    }
+    lines.push("");
+  }
+  lines.push("*Итого: "+f(total)+"*");
+  return lines.join("\n");
+}
+
+function send(t){
+  var msg=bm();
+  var url=t==="wa"
+    ? "https://wa.me/"+WA+"?text="+encodeURIComponent(msg)
+    : "https://t.me/"+TG+"?text="+encodeURIComponent(msg);
+  window.open(url,"_blank");
+}
+
+function ut(){
+  var items=ai(),sum=0,cnt=0;
+  var skus=Object.keys(Q);
+  for(var s=0;s<skus.length;s++){
+    var sku=skus[s],q=Q[sku];
+    if(q<1) continue;
+    for(var i=0;i<items.length;i++){
+      if(items[i].sku===sku){sum+=items[i].new*q;cnt+=q;break;}
+    }
+  }
+  document.getElementById("ts").textContent=f(sum);
+  document.getElementById("tc").textContent=cnt>0?cnt+" шт.":"";
+  var dis=cnt===0;
+  document.getElementById("wabtn").disabled=dis;
+  document.getElementById("tgbtn").disabled=dis;
+  document.getElementById("ehint").style.display=dis?"block":"none";
+}
+
+function onSearch(){SQ=document.getElementById("si").value.toLowerCase().trim();rc();}
+
+function rtabs(){
+  var el=document.getElementById("tabs");
+  el.innerHTML="";
+  var all=[{id:"all",name:"Все бренды"}].concat(B);
+  for(var i=0;i<all.length;i++){
+    (function(b){
+      var t=document.createElement("div");
+      t.className="tab"+(AB===b.id?" active":"");
+      t.textContent=b.name;
+      t.onclick=function(){AB=b.id;rtabs();rc();};
+      el.appendChild(t);
+    })(all[i]);
+  }
+}
+
+function mkBtn(sku,delta,label){
+  var btn=document.createElement("button");
+  btn.className="qbtn";
+  btn.textContent=label;
+  btn.setAttribute("data-sku",sku);
+  btn.setAttribute("data-d",delta);
+  btn.onclick=function(){cq(this.getAttribute("data-sku"),parseInt(this.getAttribute("data-d")));};
+  return btn;
+}
+
+function rc(){
+  var el=document.getElementById("content");
+  el.innerHTML="";
+  var brands=AB==="all"?B:[];
+  if(AB!=="all"){for(var i=0;i<B.length;i++){if(B[i].id===AB){brands=[B[i]];break;}}}
+  var shown=0;
+
+  for(var bi=0;bi<brands.length;bi++){
+    var brand=brands[bi];
+    for(var ci=0;ci<brand.collections.length;ci++){
+      var coll=brand.collections[ci];
+      var items=[];
+      for(var ii=0;ii<coll.items.length;ii++){
+        var it=coll.items[ii];
+        if(!SQ||it.name.toLowerCase().indexOf(SQ)>=0||it.sku.toLowerCase().indexOf(SQ)>=0){
+          items.push(it);
+        }
+      }
+      if(!items.length) continue;
+      shown+=items.length;
+
+      var key=brand.id+"__"+ci;
+      if(!(key in OC)) OC[key]=true;
+      var isOpen=OC[key];
+
+      var blk=document.createElement("div");
+      blk.className="cblock";
+
+      var hdr=document.createElement("div");
+      hdr.className="chdr";
+      var left=document.createElement("div");
+      if(AB==="all"){
+        var btag=document.createElement("div");
+        btag.className="cbtag";
+        btag.textContent=brand.name;
+        left.appendChild(btag);
+      }
+      var ctitle=document.createElement("div");
+      ctitle.className="ctitle";
+      ctitle.textContent=coll.name;
+      left.appendChild(ctitle);
+      var ccnt=document.createElement("div");
+      ccnt.className="ccnt";
+      ccnt.textContent=items.length+" позиций";
+      left.appendChild(ccnt);
+      hdr.appendChild(left);
+
+      var chev=document.createElement("div");
+      chev.className="cchev"+(isOpen?" open":"");
+      chev.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg>';
+      hdr.appendChild(chev);
+
+      (function(k){
+        hdr.onclick=function(){OC[k]=!OC[k];rc();};
+      })(key);
+      blk.appendChild(hdr);
+
+      if(isOpen){
+        var wrap=document.createElement("div");
+        wrap.className="tbwrap";
+        var th=document.createElement("div");
+        th.className="thead";
+        th.innerHTML='<div class="th">Артикул</div><div class="th">Наименование</div><div class="th r">Цена</div><div class="th r">Ваша цена</div><div class="th r">Кол-во</div>';
+        wrap.appendChild(th);
+
+        for(var ii=0;ii<items.length;ii++){
+          (function(it){
+            var row=document.createElement("div");
+            row.className="irow"+((Q[it.sku]||0)>0?" sel":"");
+            row.id="r_"+it.sku;
+
+            var skuEl=document.createElement("div");
+            skuEl.className="isku";
+            skuEl.textContent=it.sku;
+
+            var nameEl=document.createElement("div");
+            nameEl.className="iname";
+            if(it.isNew){
+              var badge=document.createElement("span");
+              badge.className="nbadge";
+              badge.textContent="New";
+              nameEl.appendChild(badge);
+            }
+            nameEl.appendChild(document.createTextNode(it.name));
+
+            var pnew=document.createElement("div");
+            pnew.className="pnew";
+            pnew.textContent=f(it.new);
+
+            var pold=document.createElement("div");
+            pold.className="pold";
+            pold.textContent=f(it.old);
+
+            var qcell=document.createElement("div");
+            qcell.className="qcell";
+            qcell.appendChild(mkBtn(it.sku,-1,"−"));
+            var qval=document.createElement("span");
+            qval.className="qval";
+            qval.id="q_"+it.sku;
+            qval.textContent=(Q[it.sku]||0);
+            qcell.appendChild(qval);
+            qcell.appendChild(mkBtn(it.sku,1,"+"));
+
+            row.appendChild(skuEl);
+            row.appendChild(nameEl);
+            row.appendChild(pnew);
+            row.appendChild(pold);
+            row.appendChild(qcell);
+            wrap.appendChild(row);
+          })(items[ii]);
+        }
+        blk.appendChild(wrap);
+      }
+      el.appendChild(blk);
+    }
+  }
+
+  if(!shown){
+    var nr=document.createElement("div");
+    nr.className="nores";
+    nr.textContent="Ничего не найдено";
+    el.appendChild(nr);
+  }
+
+  var total=0;
+  for(var i=0;i<B.length;i++){
+    for(var j=0;j<B[i].collections.length;j++){
+      total+=B[i].collections[j].items.length;
+    }
+  }
+  document.getElementById("hcount").textContent=total+" позиций";
+}
+
+rtabs();rc();ut();
+</script>
+</body>
+</html>
